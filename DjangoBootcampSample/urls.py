@@ -19,7 +19,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'.*', include('samplepolls.urls')),
+    # url(r'.*', include('samplepolls.urls')),
     url(r'^samplepolls/', include('samplepolls.urls')), # adding now
     url(r'^admin/', admin.site.urls), # already set up
 ]
