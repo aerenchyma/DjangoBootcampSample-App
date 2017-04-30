@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import Http404
 
 from .models import Question
 
@@ -16,12 +17,21 @@ def index(request):
 
 
 
+def detail(request, question_id):
+    try:
+        question = Question.objects.get(pk=question_id)
+        # This is special... what if you changed question_id to 1 in this line of code? What would happen?
+    except Question.DoesNotExist: # special Except clause usage
+        raise Http404("Question does not exist!")
+    return render(request, 'samplepolls/detail.html',{'question':question})
+
+
 #
 # def index(request):
 #     return HttpResponse("Hello, world. You're at the polls index.")
 #
-def detail(request, question_id):
-    return HttpResponse("You're looking at question {}".format(question_id))
+# def detail(request, question_id):
+#     return HttpResponse("You're looking at question {}".format(question_id))
 
 def results(request, question_id):
     response = "You're looking at the results of question {}"
