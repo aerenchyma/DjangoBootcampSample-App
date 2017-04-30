@@ -1,1 +1,2 @@
-web: gunicorn myproject.wsgi --log-file -
+web: gunicorn DjangBootcampSample.wsgi --log-file -
+web: gunicorn gettingstarted.wsgi
