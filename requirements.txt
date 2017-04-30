@@ -1,6 +1,7 @@
 Django==1.10.5
 django-mysql==1.1.1
 dj-database-url==0.4.2
+gunicorn==19.7.1
 pep8==1.7.0
 psutil==5.0.1
 psycopg2==2.7.1
