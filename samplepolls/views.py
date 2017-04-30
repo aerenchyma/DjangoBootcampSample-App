@@ -18,12 +18,8 @@ def index(request):
 
 
 def detail(request, question_id):
-    try:
-        question = Question.objects.get(pk=question_id)
-        # This is special... what if you changed question_id to 1 in this line of code? What would happen?
-    except Question.DoesNotExist: # special Except clause usage
-        raise Http404("Question does not exist!")
-    return render(request, 'samplepolls/detail.html',{'question':question})
+    question = get_object_or_404(Question, pk=question_id)
+    return render(request, 'samplepolls/detail.html', {'question': question})
 
 
 #
