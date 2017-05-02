@@ -7,32 +7,22 @@ from django.views import generic
 from .models import Choice, Question
 
 class IndexView(generic.ListView):
-    template_name = 'polls/index.html'
+    template_name = 'samplepolls/index.html'
     context_object_name = 'latest_question_list'
 
     def get_queryset(self):
         """ Return the last 5 pub'd qs"""
         return Question.objects.order_by('-pub_date')[:5]
 
-# Create your views here.
-# def index(request):
-#     latest_question_list = Question.objects.order_by('-pub_date')[:5]
-#     # template = loader.get_template('samplepolls/index.html')
-#     context = {
-#         'latest_question_list': latest_question_list
-#     }
-#     # return HttpResponse(template.render(context,request))
-#     return render(request, 'samplepolls/index.html', context)
-# # Check out the docs for more explanation of this
+class DetailView(generic.DetailView):
+    model = Question
+    template_name = 'samplepolls/detail.html'
 
+class ResultsView(generic.DetailView):
+    model = Question
+    template_name = 'samplepolls/results.html'
 
-
-def detail(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    print("I'm looking at the detail of question {}".format(question_id))
-    return render(request, 'samplepolls/detail.html', {'question': question})
-
-
+# vote function stays the same
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     print("Voted for {}".format(question_id))
@@ -53,9 +43,26 @@ def vote(request, question_id):
         return HttpResponseRedirect(reverse('samplepolls:results', args=(question.id,)))
 
 
-def results(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'samplepolls/results.html', {'question': question})
+# Create your views here.
+# def index(request):
+#     latest_question_list = Question.objects.order_by('-pub_date')[:5]
+#     # template = loader.get_template('samplepolls/index.html')
+#     context = {
+#         'latest_question_list': latest_question_list
+#     }
+#     # return HttpResponse(template.render(context,request))
+#     return render(request, 'samplepolls/index.html', context)
+# # Check out the docs for more explanation of this
+
+# def detail(request, question_id):
+#     question = get_object_or_404(Question, pk=question_id)
+#     print("I'm looking at the detail of question {}".format(question_id))
+#     return render(request, 'samplepolls/detail.html', {'question': question})
+
+
+# def results(request, question_id):
+#     question = get_object_or_404(Question, pk=question_id)
+#     return render(request, 'samplepolls/results.html', {'question': question})
 
 #
 # def index(request):
