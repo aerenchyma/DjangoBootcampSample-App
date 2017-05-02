@@ -16,6 +16,5 @@ class Choice(models.Model):
 
 # Superuser
 # user1
-# jczetta@umich.edu
 # password123
 

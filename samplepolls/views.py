@@ -21,6 +21,7 @@ def index(request):
 
 def detail(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
+    print("I'm looking at the detail of question {}".format(question_id))
     return render(request, 'samplepolls/detail.html', {'question': question})
 
 
