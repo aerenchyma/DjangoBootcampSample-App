@@ -1,21 +1,29 @@
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponse, HttpResponseRedirect
-from django.http import Http404
+from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.views import generic
 
 
-from .models import Question
+from .models import Choice, Question
+
+class IndexView(generic.ListView):
+    template_name = 'polls/index.html'
+    context_object_name = 'latest_question_list'
+
+    def get_queryset(self):
+        """ Return the last 5 pub'd qs"""
+        return Question.objects.order_by('-pub_date')[:5]
 
 # Create your views here.
-def index(request):
-    latest_question_list = Question.objects.order_by('-pub_date')[:5]
-    # template = loader.get_template('samplepolls/index.html')
-    context = {
-        'latest_question_list': latest_question_list
-    }
-    # return HttpResponse(template.render(context,request))
-    return render(request, 'samplepolls/index.html', context)
-# Check out the docs for more explanation of this
+# def index(request):
+#     latest_question_list = Question.objects.order_by('-pub_date')[:5]
+#     # template = loader.get_template('samplepolls/index.html')
+#     context = {
+#         'latest_question_list': latest_question_list
+#     }
+#     # return HttpResponse(template.render(context,request))
+#     return render(request, 'samplepolls/index.html', context)
+# # Check out the docs for more explanation of this
 
 
 
